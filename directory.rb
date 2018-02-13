@@ -17,22 +17,36 @@ def input_students
   students
 end
 
+def student_search(students)
+  puts "Select letter to search students directory:"
+  puts "** Note: write \"all\" to list all students"
+  user_search = gets.chomp.downcase
+  if user_search == "all"
+    select_students = students
+  else
+    select_students = students.select { |student| student[:name].chars.first.downcase == user_search }
+  end
+  select_students
+end
+
 def print_header
   puts "The students of Villains Academy"
   puts "-------------"
 end
 
-def print(students)
-  students.each_with_index do |student, index|
-    puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
-  end
+def print(select_students)
+    select_students.each_with_index do |student, index|
+      puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    end
 end
 
-def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
+def print_footer(select_students)
+  puts "Overall, we have #{select_students.count} great students"
 end
+
 students = input_students
+select_students = student_search(students)
 #nothing happens until we call the methods
 print_header
-print(students)
-print_footer(students)
+print(select_students)
+print_footer(select_students)
