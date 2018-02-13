@@ -58,6 +58,14 @@ def input_students
   students
 end
 
+def group_cohorts(students)
+  puts "What cohort would you like to print?"
+  user_cohort = gets.chomp.strip.downcase.to_sym
+  students.select do |student|
+    student[:cohort] == user_cohort
+  end
+end
+
 def print_header
   puts "The students of Villains Academy"
   puts "-------------"
@@ -73,7 +81,8 @@ def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
 students = input_students
+selected_cohorts = group_cohorts(students)
 #nothing happens until we call the methods
 print_header
-print(students)
+print(selected_cohorts)
 print_footer(students)
